@@ -15,5 +15,30 @@ const schemas ={
             password: Joi.string().min(6).required(), 
             }),
         },
+    createEmailTemplate:{
+        body: Joi.object({
+            subject: Joi.string().required(),
+            textBody: Joi.string().required(),
+            htmlBody: Joi.string().required(),
+            placeholders: Joi.array().items(Joi.string().required()).optional(),
+            }),
+        },
+    updateEmailTemplate:{
+        body: Joi.object({
+            subject: Joi.string().optional(),
+            textBody: Joi.string().optional(),
+            htmlBody: Joi.string().optional(),
+            placeholders: Joi.array().items(Joi.string().required()).optional(),
+            }),
+        },
+    getEmailTemplates:{
+        },
+    deleteEmailTemplate:{
+        params: Joi.object({
+            templateId: Joi.string().required(),
+            }),
+        },       
+
+        
 };
 module.exports = schemas;
