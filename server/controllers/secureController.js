@@ -73,7 +73,7 @@ const createEmailTemplate = async (req, res) => {
 
 // Update an existing email template
 const updateEmailTemplate = async (req, res) => {
-    const templateId = req.params.id;
+    const {templateId} = req.params;
     const { subject, textBody, htmlBody, placeholders } = req.body;
 
     const updatedTemplate = await Template.findByIdAndUpdate(
@@ -96,7 +96,7 @@ const updateEmailTemplate = async (req, res) => {
 
 // Get all email templates for a user
 const getEmailTemplates = async (req, res) => {
-    const userId = req.user.id;
+    const {userId} = req.user;
     const templates = await Template.find({ userId });
 
     if (templates.length === 0) {

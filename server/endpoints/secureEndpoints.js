@@ -4,7 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });  // Multer configuration
 
-const {uploadCSV} = require("./../controllers/secureController");
+const {uploadCSV, createEmailTemplate, updateEmailTemplate, getEmailTemplates, deleteEmailTemplate} = require("./../controllers/secureController");
 
 const validationMiddleware = require('./../middleware/validationMiddleware');
 
