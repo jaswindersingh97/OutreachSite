@@ -25,7 +25,9 @@ const authEndpoints = require("./endpoints/authEnpoints");
 app.use(authEndpoints);
 
 const authMiddleware = require("./middleware/authMiddleware");
+const secureEndpoints = require('./endpoints/secureEndpoints');
 
+app.use("/secure",authMiddleware,secureEndpoints);
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the server" });
 });
