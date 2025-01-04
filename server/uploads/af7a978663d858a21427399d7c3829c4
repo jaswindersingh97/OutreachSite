@@ -1,0 +1,6 @@
+first_name,last_name,email,age,city
+John,Doe,john.doe@example.com,28,New York
+Jane,Smith,jane.smith@example.com,34,Los Angeles
+Alice,Johnson,alice.johnson@example.com,25,Chicago
+Bob,White,bob.white@example.com,40,San Francisco
+Charlie,Brown,charlie.brown@example.com,30,Miami

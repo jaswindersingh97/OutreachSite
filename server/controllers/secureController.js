@@ -4,7 +4,7 @@ const csv = require('csv-parser');
 
 const asynHandler = require('./../utils/asyncHandler');
 const CsvData = require('./../models/csvDataSchema');  // Import the CSV model
-const User = require('./../models/UserModel'); // Assuming you have a User model
+// const User = require('./../models/UserModel'); // Assuming you have a User model
 const Template = require('./../models/emailTemplateSchema'); // Assuming you have a Template model
 const asyncHandler = require('./../utils/asyncHandler');
 
@@ -22,9 +22,16 @@ const saveCSVData = async (userId, templateId, parsedData, fields) => {
 
 const uploadCSV = async (req, res) => {
   const file = req.file;
+  const { templateId } = req.body;
+  const {userId} = req.user;  
 
   if (!file) {
     return res.status(400).send('No file uploaded.');
+  }
+
+  const template = await Template.findById(templateId);
+  if (!template) {
+    return res.status(400).send('Invalid template ID');
   }
 
   const filePath = path.join(__dirname, '../uploads', file.filename);
@@ -38,14 +45,6 @@ const uploadCSV = async (req, res) => {
     .on('end', async () => {
       const fields = Object.keys(results[0]);
 
-      const { templateId } = req.body;
-      
-      const template = await Template.findById(templateId);
-      if (!template) {
-        return res.status(400).send('Invalid template ID');
-      }
-
-      const userId = req.user.id;  
       await saveCSVData(userId, templateId, results, fields);
     })
     .on('error', (err) => {
